@@ -62,7 +62,7 @@
         </developer>
     </developers>
 
-    <description>Core Extension to integrate the Lucee Administrator into Lucee.</description>
+    <description>Core Extension to integrate the Classic Scheduler into Lucee, that was part of the Lucee core up to Lucee 6.</description>
     <url>https://github.com/lucee/extension-scheduler-classic</url>
 
     <profiles>
