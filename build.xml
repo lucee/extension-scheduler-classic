@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="clean" basedir="." name="administrator-extension">
+	<description>
+        Build Lucee Scheduler Extension
+    </description>
+    <!-- set global properties for this build -->
+  
+  <property file="build.properties"/>
+
+  <property name="src" location="source"/>
+  <property name="srcImg" location="source/images"/>
+  <property name="srcCFML" location="source/cfml"/>
+  <property name="temp" location="temp"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="target"/>
+  <property name="javaVersionCoreDefault" value="11"/>
+  <property name="javaVersionAgent" value="11"/>
+  <property name="javaVersionLoader" value="11"/>
+    <property name="runtime_classpath" value="${java.class.path}"/>
+  <tstamp>
+      <format property="NOW" pattern="yyyy/MM/dd HH:mm:ss z" locale="en,GB"/>
+  </tstamp>
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    
+    <delete dir="${temp}"/>
+    <delete dir="${dist}"/>
+
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${temp}"/>
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}/"/>
+
+
+  </target>
+
+
+
+  <target name="dist" depends="init"
+        description="generate the distribution" >
+    
+
+    <!-- copy the logo -->
+    <copy todir="${dist}/extension/META-INF">
+      <fileset dir="${srcImg}/">
+        <include name="logo.png"/>
+      </fileset>
+    </copy>
+
+    <!-- add Manifest -->
+    <echo file="${dist}/extension/META-INF/MANIFEST.MF">Manifest-Version: 1.0
+Built-Date: ${NOW}
+version: "${bundleversion}"
+id: "${id}"
+name: "${label}"
+description: "${description}"
+start-bundles: false
+trial: false
+lucee-core-version: "${luceeCoreVersion}"
+release-type: ${releaseType}
+mapping: "[{'virtual':'/lucee/admin','physical':'{lucee-config}/context/admin','archive':'{lucee-config}/context/lucee-admin.lar','primary':'physical ','inspect':'once ','toplevel':'true','readonly':'true','listener-mode':'curr2root','listener-type':'modern'}]"
+</echo>
+
+
+
+    <!-- Zip everything  -->
+     <zip destfile="${dist}/${filename}-${bundleversion}.lex">
+        <zipfileset dir="${dist}/extension"/>
+    </zip>
+		
+  </target>
+
+
+
+
+
+	<target name="clean"  depends="dist" description="clean up" >
+		<delete dir="${dist}/extension"/>
+    <delete dir="${build}"/>
+    <delete dir="${temp}"/>
+	</target>
+
+</project>
