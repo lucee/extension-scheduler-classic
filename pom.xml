@@ -14,7 +14,7 @@
         <maven.compiler.target>11</maven.compiler.target>
         <id>97EB5427-F051-4684-91EBA6DBB5C5203F</id>
         <bundlename>org.lucee.scheduler.extension</bundlename>
-        <luceeCoreVersion>5.0.0.050</luceeCoreVersion>
+        <luceeCoreVersion>7.0.0.125</luceeCoreVersion>
         <releaseType>server</releaseType>
         <label>Lucee Scheduler (Classic)</label>
         <release.url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</release.url>
@@ -27,17 +27,6 @@
         <developerConnection>scm:git:git@github.com:lucee/extension-scheduler-classic.git</developerConnection>
         <tag>${project.version}</tag>
     </scm>
-
-    <distributionManagement>
-        <repository>
-            <id>ossrh</id>
-            <url>${release.url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>${snapshot.url}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <licenses>
         <license>
@@ -237,15 +226,14 @@
 
             <!-- Nexus Staging Maven Plugin to automate the release process -->
             <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <serverId>ossrh</serverId>
-                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
-                </configuration>
+              <groupId>org.sonatype.central</groupId>
+              <artifactId>central-publishing-maven-plugin</artifactId>
+              <version>0.8.0</version>
+              <extensions>true</extensions>
+              <configuration>
+                <publishingServerId>ossrh</publishingServerId>
+                <autoPublish>true</autoPublish>
+              </configuration>
             </plugin>
         </plugins>
     </build>
