@@ -61,7 +61,6 @@ start-bundles: false
 trial: false
 lucee-core-version: "${luceeCoreVersion}"
 release-type: ${releaseType}
-mapping: "[{'virtual':'/lucee/admin','physical':'{lucee-config}/context/admin','archive':'{lucee-config}/context/lucee-admin.lar','primary':'physical ','inspect':'once ','toplevel':'true','readonly':'true','listener-mode':'curr2root','listener-type':'modern'}]"
 </echo>
 
 
